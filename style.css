@@ -1,0 +1,173 @@
+:root{
+  --bg: #fdfbfb;
+  --text: #333;
+  --primary: #ff6a88;
+  --secondary: #ff99ac;
+  --card: rgba(255,255,255,0.85);
+}
+
+*{ margin:0; padding:0; box-sizing:border-box; }
+
+body{
+  font-family: 'Poppins', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+/* Animated background gradient overlay */
+body::before{
+  content:"";
+  position:fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background: radial-gradient(circle at 20% 30%, #ffd6e0, transparent 40%),
+              radial-gradient(circle at 80% 80%, #a6c1ee, transparent 50%);
+  z-index:-1;
+  animation: gradientMove 20s infinite alternate;
+}
+@keyframes gradientMove{
+  0%{ transform: translate(0,0) scale(1);}
+  50%{ transform: translate(-50px,30px) scale(1.05);}
+  100%{ transform: translate(30px,-50px) scale(1);}
+}
+
+/* Header */
+header{
+  text-align:center;
+  padding:60px 20px;
+  background: linear-gradient(135deg,#ff9a9e,#fad0c4);
+  color:#fff;
+  box-shadow:0 8px 30px rgba(0,0,0,0.2);
+}
+header h1{
+  font-family: 'Pacifico', cursive;
+  font-size:3rem;
+}
+
+main{ max-width:1200px; margin:auto; padding:50px 20px; }
+
+/* Overview Section */
+.overview{
+  max-width:800px;
+  margin:50px auto;
+  text-align:center;
+  padding:20px;
+  background: rgba(255,255,255,0.9);
+  border-radius:15px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.1);
+  backdrop-filter: blur(10px);
+}
+.overview h2{
+  font-family:'Pacifico', cursive;
+  font-size:2.2rem;
+  color: var(--primary);
+  margin-bottom:15px;
+}
+.overview p{
+  font-family:'Poppins', sans-serif;
+  font-size:1.1rem;
+  line-height:1.7;
+  color: var(--text);
+}
+
+.timeline{ position:relative; margin:50px 0;}
+.timeline::after{
+  content:'';
+  position:absolute;
+  width:6px;
+  background: linear-gradient(to bottom,var(--primary),var(--secondary));
+  top:0; bottom:0; left:50%; transform:translateX(-50%);
+  border-radius:3px;
+}
+
+.timeline-item{
+  position:relative;
+  width:50%;
+  padding:20px 40px;
+  opacity:0;
+  transform: translateY(50px) scale(0.95);
+  transition: all 0.8s ease-out;
+}
+.timeline-item.left{ left:0; }
+.timeline-item.right{ left:50%; }
+
+.timeline-item .timeline-content{
+  background: var(--card);
+  backdrop-filter: blur(12px);
+  padding:25px;
+  border-radius:18px;
+  box-shadow:0 15px 35px rgba(0,0,0,0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.timeline-item .timeline-content:hover{
+  transform: translateY(-8px) scale(1.03);
+  box-shadow:0 20px 40px rgba(0,0,0,0.25);
+}
+
+.timeline-item img{
+  width:100%;
+  border-radius:15px;
+  margin-bottom:15px;
+  transition: transform 0.3s ease;
+}
+.timeline-item img:hover{ transform: scale(1.07); }
+
+.timeline-item .description h2{
+  color: var(--primary);
+  font-family:'Pacifico', cursive;
+  font-size:1.7rem;
+  margin-bottom:10px;
+}
+.timeline-item .description p{ font-size:1rem; line-height:1.6;}
+
+.timeline-item::before{
+  content:'';
+  position:absolute;
+  width:22px; height:22px;
+  background: var(--primary);
+  border-radius:50%;
+  top:35px;
+  z-index:1;
+  box-shadow:0 0 10px var(--primary),0 0 20px rgba(255,106,136,0.5);
+}
+.timeline-item.left::before{ right:-11px; }
+.timeline-item.right::before{ left:-11px; }
+
+.timeline-content {
+  position: relative; /* required for absolute positioning of date tag */
+}
+
+.date-tag {
+  position: absolute;
+  top:15px;
+  right:15px;
+  background: var(--primary);
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  font-size:0.85rem;
+  font-weight:600;
+  padding:5px 10px;
+  border-radius:20px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+}
+
+
+@media screen and (max-width:768px){
+  .timeline-item, .timeline-item.right{ width:100%; left:0 !important; padding:20px 20px; }
+  .timeline::after{ left:20px; }
+  .timeline-item::before{ left:10px !important; }
+}
+
+/* Footer */
+footer{
+  text-align:center;
+  padding:30px 20px;
+  margin-top:50px;
+  background: linear-gradient(135deg,#fad0c4,#ffd6e0);
+  color: var(--text);
+  box-shadow:0 -5px 20px rgba(0,0,0,0.1);
+  font-size:1rem;
+  letter-spacing:0.5px;
+}
